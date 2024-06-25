@@ -1,0 +1,128 @@
+* {
+  padding: 0;
+  margin: 0;
+
+  font-family: 'Indie Flower', cursive;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 58.36px;
+}
+
+#main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+}
+
+#game-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 80%;
+  padding: 1%;
+}
+
+span.player-identification {
+  font-size: 25px;
+}
+
+#gameboard {
+  display: grid;
+  width: 80%;
+  height: 80%;
+  background-color: #ffffff;
+  row-gap: 2%;
+  column-gap: 2%;
+}
+
+.cell {
+  display: flex;
+  background-color: #a5a5a5;
+
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 90px;
+  user-select: none;
+}
+
+.player1-color {
+  color: #3F54E4;
+}
+
+.player2-color {
+  color: #EC4A4A;
+  ;
+}
+
+#popup {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+#popup-content {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  height: 50%;
+  background-color: #ffffff;
+  align-items: center;
+}
+
+#popup-title {
+  margin: 30px 0px;
+  font-size: 50px;
+  color: #000000;
+  font-weight: 400;
+}
+
+#popup-text {
+  font-size: 45px;
+  font-weight: 400;
+}
+
+#ranking p {
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.popup-btn {
+  width: 283px;
+  height: 80px;
+  border-radius: 14px;
+  color: #FFFFFF;
+  font-size: 30px;
+  border: 0px;
+}
+
+.popup-btn:nth-child(1) {
+  background: #3F54E4;
+}
+
+.popup-btn:nth-child(2) {
+  background: #EC4A4A;
+}
+
+.popup-btns {
+  margin-top: auto;
+  margin-bottom: 50px;
+
+}
