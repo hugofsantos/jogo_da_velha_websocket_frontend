@@ -1,19 +1,40 @@
 const GAMEBOARD_SIZE = 3;
-let player = 1;
-
-const playerSimbols = {
-  1: 'X',
-  2: 'O'
-}
+let player = 'X';
+let turn = 'X';
 
 function setupGameInfo() {
   const roundTextEl = document.querySelector("#game-info > span.round-text");
-  roundTextEl.innerText = `Vez do Jogador ${player} (${playerSimbols[player]})`;
-  roundTextEl.classList.add(`player${player}-color`);
+  roundTextEl.innerText = `Vez do Jogador ${turn}`;
+  roundTextEl.classList.add(`player${turn == 'X' ? 1 : 2}-color`);
 
   const playerIdentificationText = document.querySelector("#game-info > span.player-identification");
-  playerIdentificationText.innerText = `Jogador ${player} (${playerSimbols[player]})`;
-  playerIdentificationText.classList.add(`player${player}-color`);
+  playerIdentificationText.innerText = `Jogador ${player}`;
+  playerIdentificationText.classList.add(`player${player == 'X' ? 1 : 2}-color`);
+}
+
+function showPopup(title, content, buttonText="", onClickButton = () => {}) {
+  document.getElementById('popup-title').textContent = title;
+  document.getElementById('popup-text').textContent = content;
+  document.getElementById('popup').style.display = 'flex';
+
+  if(buttonText) {
+    const mainButton = document.getElementById('popup-main-btn');
+    
+    document.getElementById('popup-btns').style.display='block';
+    mainButton.textContent = buttonText;
+    mainButton.addEventListener('click', onClickButton);
+  }
+}
+
+function closePopup() {
+  document.getElementById('popup-title').textContent = "";
+  document.getElementById('popup-text').textContent = "";
+  document.getElementById('popup').style.display = 'none';
+
+  const mainButton = document.getElementById('popup-main-btn');
+
+  document.getElementById('popup-btns').style.display = 'none';
+  mainButton.textContent = "";
 }
 
 function renderGameboard(size) {
@@ -31,10 +52,7 @@ function renderGameboard(size) {
 
     el.addEventListener('click', onClickCell);
 
-    const row = Math.floor(index / size);
-    const col = index % size;
-
-    el.id = `cell-${row}-${col}`; // Ex: cell_0_2 (Para o elemento da linha 0 e coluna 2, isso vai facilitar na hora de pegar o click depois)
+    el.id = `cell-${index + 1}`;
     return el;
   });
 
@@ -44,11 +62,10 @@ function renderGameboard(size) {
 function onClickCell(event) {
   const element = event.srcElement;
 
-  const [rowStr, colStr] = element.id.replace('cell-', '').split('-');
-  const row = Number(rowStr);
-  const col = Number(colStr);
+  const cellIndex = element.id.replace('cell-', '');
+  const position = Number(cellIndex);
 
-  console.log(`CLICOU NA CÉLULA (${row}, ${col})`)
+  console.log(`CLICOU NA CÉLULA ${position}`)
 }
 
 setupGameInfo();

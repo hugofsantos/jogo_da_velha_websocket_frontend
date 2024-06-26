@@ -81,32 +81,24 @@ span.player-identification {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  width: 45%;
-  height: 50%;
+  width: 35%;
   background-color: #ffffff;
   align-items: center;
 }
 
 #popup-title {
-  margin: 30px 0px;
   font-size: 50px;
   color: #000000;
   font-weight: 400;
 }
 
 #popup-text {
-  font-size: 45px;
-  font-weight: 400;
-}
-
-#ranking p {
   font-size: 30px;
   font-weight: 400;
 }
 
 .popup-btn {
-  width: 283px;
-  height: 80px;
+  width: 150px;
   border-radius: 14px;
   color: #FFFFFF;
   font-size: 30px;
@@ -121,8 +113,8 @@ span.player-identification {
   background: #EC4A4A;
 }
 
-.popup-btns {
-  margin-top: auto;
-  margin-bottom: 50px;
-
+#popup-btns {
+  display: none;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
