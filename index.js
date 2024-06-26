@@ -1,3 +1,17 @@
+let clientId = "";
+
+async function setupConnection() {
+  clientId = await getClientId();
+}
+
+async function getClientId() {
+  const host = 'localhost';
+  const port = '8000'; 
+
+  const response = await fetch(`http://${host}:${port}/register`, { method: 'POST' });
+  return await response.text();
+}
+
 function addDisabledToltip() {
   const disabled_buttons = document.querySelectorAll('.button:disabled');
   const tooltip = document.getElementById('tooltip');
@@ -16,11 +30,9 @@ function addDisabledToltip() {
   });  
 }
 
-function addNavigationToButton(buttonId, url) {
-  document.getElementById(buttonId).addEventListener('click', function() {
-      window.location.href = url;  // Substitua 'pagina.html' pela URL desejada
-  });  
-}
-
 addDisabledToltip();
-addNavigationToButton("find-match", "./views/tabuleiro/tabuleiro.html")
+setupConnection();
+
+document.getElementById('find-match').addEventListener('click', () => {
+  window.location.href = `./views/tabuleiro/tabuleiro.html?client=${clientId}`;
+})

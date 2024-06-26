@@ -62,7 +62,6 @@ span.player-identification {
 
 .player2-color {
   color: #EC4A4A;
-  ;
 }
 
 #popup {
@@ -95,6 +94,8 @@ span.player-identification {
 #popup-text {
   font-size: 30px;
   font-weight: 400;
+  margin-left: 3%;
+  text-align: center;
 }
 
 .popup-btn {
