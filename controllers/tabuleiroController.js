@@ -22,7 +22,7 @@ function setupConnection() {
 
 function setupWsConnection(clientId) {
   const host = "localhost";
-  const port = "8080";
+  const port = "8000";
 
   socket = new WebSocket(`ws://${host}:${port}/ws/${clientId}`);
 
