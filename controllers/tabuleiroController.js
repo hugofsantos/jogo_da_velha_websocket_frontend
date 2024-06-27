@@ -29,13 +29,13 @@ function setupWsConnection(clientId) {
   // Evento de conexão aberta
   socket.onopen = function (event) {
     console.log('Conexão aberta');
+    showPopup("Aviso", "Buscando partida...")
     socket.send('join_game');
   };
 
   // Evento de recebimento de mensagem
   socket.onmessage = function (event) {
-    const msg = event.data.trim().toUpperCase().replace(/\n/g, '');
-    
+    const msg = event.data.trim().toUpperCase().replace(/\n/g, '');    
 
     console.log('Mensagem recebida do servidor:', msg);
     if (["X", "O"].includes(msg)) {
