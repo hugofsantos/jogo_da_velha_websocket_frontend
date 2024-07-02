@@ -47,6 +47,7 @@ function setupWsConnection(clientId) {
       started_game = false;
     }else if (msg === 'WAITING_PLAYERS') {
       started_game = false;
+      clear_gameboard();
       showPopup("Aviso", "Esperando outro jogador se conectar...")
     } else if (msg === 'START_GAME') {
       started_game = true;
@@ -56,8 +57,10 @@ function setupWsConnection(clientId) {
       markCell(symbol.toUpperCase(), Number(position));
     } else if (msg.startsWith('WINNER')) {
       const [, winner] = msg.split(" ");
+
       showPopup("Fim de Jogo", winner === player ? 'Você venceu!' : `Você perdeu!`, 'OK', backToMenu);
     } else if (msg === 'DRAW') {
+
       showPopup("Empate", "O jogo deu empate!", 'OK', backToMenu);
     } 
   };
@@ -141,6 +144,13 @@ function renderGameboard(size) {
   boardEl.append(...cells);
 }
 
+function clear_gameboard() {
+  const gameboard = document.getElementById('gameboard');
+  gameboard.childNodes.forEach((element) => {
+    element.innerText = ' ';
+  })
+}
+
 function onClickCell(event) {
   const element = event.srcElement;
 
@@ -161,7 +171,6 @@ function markCell(symbol, cellPosition) {
   
   cellElement.innerText = symbol;
   cellElement.classList.add(getClassNameByPlayerSymbol(symbol));
-
   turn = getInvertedPlayerSymbol(symbol);
 
   changeRoundText(turn);
