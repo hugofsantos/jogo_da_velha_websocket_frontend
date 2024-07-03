@@ -38,7 +38,6 @@ function setupWsConnection(clientId) {
   socket.onmessage = function (event) {
     const msg = event.data.trim().toUpperCase().replace(/\n/g, '');    
 
-    console.log('Mensagem recebida do servidor:', msg);
     if (["X", "O"].includes(msg)) {
       turn = 'X';
       changeRoundText(turn);
@@ -65,7 +64,7 @@ function setupWsConnection(clientId) {
     } else if (msg === 'DRAW') {
       ended_game = true;
 
-      showPopup("Empate", "O jogo deu empate!", 'OK', backToMenu);
+      showPopup("Empate", "O jogo empatou!", 'OK', backToMenu);
       socket.close();
     } 
   };
