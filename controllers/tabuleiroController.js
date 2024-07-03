@@ -2,6 +2,7 @@ const GAMEBOARD_SIZE = 3;
 let player = 'X';
 let turn = 'X';
 let started_game = false;
+let ended_game = false;
 
 let socket = null;
 
@@ -48,7 +49,7 @@ function setupWsConnection(clientId) {
     }else if (msg === 'WAITING_PLAYERS') {
       started_game = false;
       clear_gameboard();
-      showPopup("Aviso", "Esperando outro jogador se conectar...")
+      !ended_game && showPopup("Aviso", "Esperando outro jogador se conectar...")
     } else if (msg === 'START_GAME') {
       started_game = true;
       closePopup();
@@ -57,11 +58,15 @@ function setupWsConnection(clientId) {
       markCell(symbol.toUpperCase(), Number(position));
     } else if (msg.startsWith('WINNER')) {
       const [, winner] = msg.split(" ");
+      ended_game = true;
 
       showPopup("Fim de Jogo", winner === player ? 'Você venceu!' : `Você perdeu!`, 'OK', backToMenu);
+      socket.close();
     } else if (msg === 'DRAW') {
+      ended_game = true;
 
       showPopup("Empate", "O jogo deu empate!", 'OK', backToMenu);
+      socket.close();
     } 
   };
 
@@ -73,7 +78,7 @@ function setupWsConnection(clientId) {
   
   // Evento de conexão fechada
   socket.onclose = function (event) {
-    showPopup("Aviso", "A conexão com o servidor foi encerrada", "OK", backToMenu)    
+    !ended_game && showPopup("Aviso", "A conexão com o servidor foi encerrada", "OK", backToMenu)    
     console.log('Conexão fechada:', event);
   };  
 }
